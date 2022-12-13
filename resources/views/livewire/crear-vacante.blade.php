@@ -18,7 +18,10 @@
     <div>
         <x-input-label for="categoria" :value="__('Categoria:')" />
         <select name="categoria" id="categoria" class="w-full border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm">
-     
+            <opton>-- selecciones -- </opton>
+            @foreach ($categorias as $id => $categoria)
+                <option value="{{ $id }}">{{ $categoria }}</option>
+            @endforeach)
         </select>
     </div>
 
