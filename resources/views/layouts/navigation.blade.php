@@ -10,19 +10,22 @@
                     </a>
                 </div>
 
-                <!-- Navigation Links -->
-                <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                    <x-nav-link :href="route('vacantes.index')" :active="request()->routeIs('vacantes.index')">
-                        {{ __('Vacantes') }}
-                    </x-nav-link>
-                    <x-nav-link :href="route('vacantes.create')" :active="request()->routeIs('vacantes.create')">
-                        {{ __('Crear Vacante') }}
-                    </x-nav-link>
-                </div>
+                @auth
+                    <!-- Navigation Links -->
+                    <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                        <x-nav-link :href="route('vacantes.index')" :active="request()->routeIs('vacantes.index')">
+                            {{ __('Vacantes') }}
+                        </x-nav-link>
+                        <x-nav-link :href="route('vacantes.create')" :active="request()->routeIs('vacantes.create')">
+                            {{ __('Crear Vacante') }}
+                        </x-nav-link>
+                    </div>
+                @endauth
             </div>
 
             <!-- Settings Dropdown -->
             <div class="hidden sm:flex sm:items-center sm:ml-6">
+                @auth
                 <x-dropdown align="right" width="48">
                     <x-slot name="trigger">
                         <button class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 bg-white hover:text-gray-700 focus:outline-none transition ease-in-out duration-150">
@@ -53,6 +56,18 @@
                         </form>
                     </x-slot>
                 </x-dropdown>
+                @endauth
+                @guest
+                    <!-- Navigation Links -->
+                    <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                        <x-nav-link :href="route('login')">
+                            {{ __('Iniciar sesión') }}
+                        </x-nav-link>
+                        <x-nav-link :href="route('register')">
+                            {{ __('Registrarse') }}
+                        </x-nav-link>
+                    </div>
+                @endguest
             </div>
 
             <!-- Hamburger -->
@@ -69,14 +84,16 @@
 
     <!-- Responsive Navigation Menu -->
     <div :class="{'block': open, 'hidden': ! open}" class="hidden sm:hidden">
-        <div class="pt-2 pb-3 space-y-1">
-            <x-responsive-nav-link :href="route('vacantes.index')" :active="request()->routeIs('vacantes.index')">
-                {{ __('Vacantes') }}
-            </x-responsive-nav-link>
-            <x-responsive-nav-link :href="route('vacantes.create')" :active="request()->routeIs('vacantes.create')">
-                {{ __('Crear vacante') }}
-            </x-responsive-nav-link>
-        </div>
+        @auth
+            <div class="pt-2 pb-3 space-y-1">
+                <x-responsive-nav-link :href="route('vacantes.index')" :active="request()->routeIs('vacantes.index')">
+                    {{ __('Vacantes') }}
+                </x-responsive-nav-link>
+                <x-responsive-nav-link :href="route('vacantes.create')" :active="request()->routeIs('vacantes.create')">
+                    {{ __('Crear vacante') }}
+                </x-responsive-nav-link>
+            </div>
+
 
         <!-- Responsive Settings Options -->
         <div class="pt-4 pb-1 border-t border-gray-200">
@@ -102,5 +119,17 @@
                 </form>
             </div>
         </div>
+        @endauth     
+        @guest
+            <!-- Navigation Links -->
+            <div class="mt-3 space-y-1">
+                <x-responsive-nav-link :href="route('login')">
+                    {{ __('Iniciar sesión') }}
+                </x-responsive-nav-link>
+                <x-responsive-nav-link :href="route('register')">
+                    {{ __('Registrarse') }}
+                </x-responsive-nav-link>
+            </div>
+        @endguest
     </div>
 </nav>
