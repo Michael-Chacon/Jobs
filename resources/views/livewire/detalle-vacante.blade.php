@@ -40,4 +40,8 @@
         <p>¿Deseas aplicar a esta vacante? <a href="{{ route('register') }}" class="font-bold text-indigo-600"> Obten una cuenta y aplica a está vacante</a></p>
     </div>
     @endguest
+
+    @cannot('create', App\Models\Vacante::class)
+        <livewire:postular-vacante />
+    @endcannot
 </div>
