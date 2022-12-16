@@ -2,8 +2,9 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Vacante extends Model
 {
@@ -35,6 +36,12 @@ class Vacante extends Model
     public function candidatos()
     {
         return $this->hasMany(Candidato::class);
+    }
+
+    // Esta relación se sale de los estandare de laravel, por eso hay que indicar la llave foranea de la tabla a la que hacemos referencia
+    public function reclutador()
+    {
+        return $this->belongsTo(User::class, 'user_id');
     }
 
 }
