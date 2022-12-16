@@ -35,7 +35,7 @@ class Vacante extends Model
 
     public function candidatos()
     {
-        return $this->hasMany(Candidato::class);
+        return $this->hasMany(Candidato::class)->orderBy('created_at', 'DESC');
     }
 
     // Esta relación se sale de los estandare de laravel, por eso hay que indicar la llave foranea de la tabla a la que hacemos referencia

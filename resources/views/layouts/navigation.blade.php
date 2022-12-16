@@ -11,7 +11,8 @@
                 </div>
 
                 @auth
-                    <!-- Navigation Links -->
+                @can('create', App\Models\Vacante::class)
+                       <!-- Navigation Links -->
                     <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                         <x-nav-link :href="route('vacantes.index')" :active="request()->routeIs('vacantes.index')">
                             {{ __('Vacantes') }}
@@ -20,6 +21,7 @@
                             {{ __('Crear Vacante') }}
                         </x-nav-link>
                     </div>
+                @endcan
                 @endauth
             </div>
 
@@ -101,25 +103,24 @@
     <!-- Responsive Navigation Menu -->
     <div :class="{'block': open, 'hidden': ! open}" class="hidden sm:hidden">
         @auth
-        @if (auth()->user()->rol === 2)
-        <div class="flex items-center gap-2 p-3">
-                    <a href="{{ route('notificaciones') }}" class="mr-2 w-12 h-7 bg-teal-600 hover:bg-teal-800 rounded-full text-white flex flex-col justify-center items-center text-sm">
-                        <div class="flex justify-between items-center">
-                            <div class="mr-1">
-                                <span class="text-red-10">
-                                    {{ auth()->user()->unreadNotifications->count() }} 
-                                </span>
-                            </div>
-                            <div>
-                                <svg xmlns="http://www.w3.org/2000/svg" fill="red" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
-                                    <path stroke-linecap="round" stroke-linejoin="round" d="M14.857 17.082a23.848 23.848 0 005.454-1.31A8.967 8.967 0 0118 9.75v-.7V9A6 6 0 006 9v.75a8.967 8.967 0 01-2.312 6.022c1.733.64 3.56 1.085 5.455 1.31m5.714 0a24.255 24.255 0 01-5.714 0m5.714 0a3 3 0 11-5.714 0M3.124 7.5A8.969 8.969 0 015.292 3m13.416 0a8.969 8.969 0 012.168 4.5" />
-                                </svg>
-                            </div>
-                        </div>   
-                    </a>
-                    @choice('Notificación|Notificaciones', auth()->user()->unreadNotifications->count())
-        </div>
-                @endif
+            @if (auth()->user()->rol === 2)
+            <div class="flex items-center gap-2 p-3">
+                        <a href="{{ route('notificaciones') }}" class="mr-2 w-12 h-7 bg-teal-600 hover:bg-teal-800 rounded-full text-white flex flex-col justify-center items-center text-sm">
+                            <div class="flex justify-between items-center">
+                                <div class="mr-1">
+                                    <span class="text-red-10">
+                                        {{ auth()->user()->unreadNotifications->count() }} 
+                                    </span>
+                                </div>
+                                <div>
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="red" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M14.857 17.082a23.848 23.848 0 005.454-1.31A8.967 8.967 0 0118 9.75v-.7V9A6 6 0 006 9v.75a8.967 8.967 0 01-2.312 6.022c1.733.64 3.56 1.085 5.455 1.31m5.714 0a24.255 24.255 0 01-5.714 0m5.714 0a3 3 0 11-5.714 0M3.124 7.5A8.969 8.969 0 015.292 3m13.416 0a8.969 8.969 0 012.168 4.5" />
+                                    </svg>
+                                </div>
+                            </div>   
+                        </a>
+                @choice('Notificación|Notificaciones', auth()->user()->unreadNotifications->count())
+            </div>
             <div class="pt-2 pb-3 space-y-1">
                 <x-responsive-nav-link :href="route('vacantes.index')" :active="request()->routeIs('vacantes.index')">
                     {{ __('Vacantes') }}
@@ -128,6 +129,7 @@
                     {{ __('Crear vacante') }}
                 </x-responsive-nav-link>
             </div>
+            @endif
 
 
         <!-- Responsive Settings Options -->
