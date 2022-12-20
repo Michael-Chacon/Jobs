@@ -19,6 +19,18 @@
                                     {{ $vacante->ultimo_dia->toFormattedDateString() }}
                                 </span>
                             </p>
+                            <p class="text-base text-gray-600 text-sm">
+                                Categoria:
+                                <span class="font-normal text-black">
+                                    {{ $vacante->categoria->categoria }}
+                                </span>
+                            </p>
+                            <p class="text-base text-gray-600 text-sm">
+                                Salario:
+                                <span class="font-normal text-black">
+                                    {{ $vacante->salario->salario }}
+                                </span>
+                            </p>
                         </div>
                         <div class="mt-5 md:mt-0">
                         <a href="{{ route('vacantes.show', $vacante->id) }}" class="uppercase border border-green-600 bg-green-100 text-green-600 font-bold p-2 my-3">
